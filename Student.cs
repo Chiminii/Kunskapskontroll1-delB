@@ -13,22 +13,21 @@ class Student
         // checking if there are any doubles
         if (Courses.Contains(course))
         {
-            Console.WriteLine($"Already in the course {course.Name}");
+            Console.WriteLine($"{Name} is already in the course {course.Name}");
             return;
         }
-
-        // if true, then the course is not full 
-        Courses.Add(course);
-
+        // check if course is full
         if (!course.Students.Contains(this))
         {
-            // if false, then the course is full
-            if (!course.Enroll(this))
+            if(course.Students.Count >= course.MaxSeats)
             {
-                Console.WriteLine($"{course.Name} is full. {Name} cannot join.");
+                Console.WriteLine($"Course {course.Name} is full. {Name} cannot join.");
                 return;
             }
         }
+        course.Students.Add(this);
+        Courses.Add(course);
+        Console.WriteLine($"{Name} has enrolled in the course {course.Name}.");
     }
     public void Leave(Course course)
     {
@@ -38,14 +37,14 @@ class Student
             // check if the course has the student registered
             if (!course.Students.Contains(this))
             {
-                Console.WriteLine($"Cannot leave since the student wasn't enrolled in the course {course.Name} to begin with. ");
+                Console.WriteLine($"{Name} cannot leave, the student wasn't enrolled in the course {course.Name} to begin with. ");
             }
             return;
         }
         // if the student is registered then can be removed
+        course.Students.Remove(this);
         Courses.Remove(course);
-        Console.WriteLine($" {Name} left {course.Name} ");
-        course.Remove(this);
+        Console.WriteLine($"{Name} has left the {course.Name} course. ");
     }
 
     public void Schedule()
