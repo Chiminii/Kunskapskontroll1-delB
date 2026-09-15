@@ -34,9 +34,21 @@ class Course
         }
     }
 
-    public void Remove(Student student)
+    public bool Remove(Student student)
     {
-        // ta bort en studerande ur kursen
+        // if a student isn't registered
+        if (!Students.Contains(student))
+        {
+            // Console.WriteLine( $"Cannot be removed. This {student.Name} does not exist on the list.");
+            return false;
+        }
+        else
+        {
+            Students.Remove(student);
+            Console.WriteLine($"Removed {student.Name}");
+            student.Leave(this);
+            return true;
+        }
     }
 
     public void RollCall()
