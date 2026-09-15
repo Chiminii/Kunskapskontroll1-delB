@@ -13,9 +13,12 @@ class Student
         // checking if there are any doubles
         if (Courses.Contains(course))
         {
-            Console.WriteLine($"Already in the course {course}");
+            Console.WriteLine($"Already in the course {course.Name}");
             return;
         }
+
+        // if true, then the course is not full 
+        Courses.Add(course);
 
         if (!course.Students.Contains(this))
         {
@@ -26,8 +29,6 @@ class Student
                 return;
             }
         }
-        // if true, then the course is not full 
-        Courses.Add(course);
     }
     public void Leave(Course course)
     {
@@ -43,13 +44,17 @@ class Student
         }
         // if the student is registered then can be removed
         Courses.Remove(course);
-        Console.WriteLine($" {Name} left {course} ");
+        Console.WriteLine($" {Name} left {course.Name} ");
         course.Remove(this);
     }
 
     public void Schedule()
     {
-        // skriver ut vilka kurser den studerande går
+        Console.WriteLine($"\n{Name}'s schedule");
+        foreach (Course course in Courses)
+        {
+            Console.WriteLine($"{Name} has {course.Name} ");
+        }
     }
 
     public override string ToString()

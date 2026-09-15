@@ -23,7 +23,6 @@ class Course
         {
             Students.Add(student);
             Console.WriteLine( $"{student} has enrolled the course {Name}.");
-
             student.Join(this);
             return true;
         }
@@ -53,7 +52,11 @@ class Course
 
     public void RollCall()
     {
-        // skriver ut alla studerande i kursen
+        Console.WriteLine($"\nStudents in the {Name} course");
+        foreach (Student student in Students)
+        {
+            Console.WriteLine( $"{student} ");
+        }
     }
 
     public override string ToString()
