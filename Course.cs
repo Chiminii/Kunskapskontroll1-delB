@@ -10,9 +10,28 @@ class Course
         MaxSeats = maxSeats;
     }
 
-    public void Enroll(Student student)
+    public bool Enroll(Student student)
     {
-        // anmäl en studerande till kursen om det finns en plats
+        // check for doubles
+        if (Students.Contains(student))
+        {
+            Console.WriteLine("Already contains this student.");
+            return false;
+        }
+        // check if there are still places left in the course
+        if(Students.Count < MaxSeats)
+        {
+            Students.Add(student);
+            Console.WriteLine( $"{student} has enrolled the course {Name}.");
+
+            student.Join(this);
+            return true;
+        }
+        else
+        {
+            Console.WriteLine($"Course {Name} is full. {student.Name} cannot enroll.");
+            return false;
+        }
     }
 
     public void Remove(Student student)

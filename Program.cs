@@ -1,6 +1,8 @@
-﻿Course math = new("Math", 20);
+﻿// Course math = new("Math", 0);
+Course eng = new("English", 20);
 Student kei = new("Kei");
-math.RollCall();
 
-Console.WriteLine(math);
-Console.WriteLine(kei);
+// math.Enroll(kei);
+// eng.Enroll(kei);
+// kei.Join(math);
+kei.Join(eng);

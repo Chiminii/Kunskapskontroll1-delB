@@ -10,7 +10,24 @@ class Student
 
     public void Join(Course course)
     {
-        // gå med i en kurs
+        // checking if there are any doubles
+        if (Courses.Contains(course))
+        {
+            Console.WriteLine($"Already in the course {course}");
+            return;
+        }
+        
+        if(!course.Students.Contains(this))
+        {
+            // if false, then the course is full
+            if (!course.Enroll(this))
+            {
+                Console.WriteLine( $"{course.Name} is full. {Name} cannot join.");
+                return;
+            }
+        }
+        // if true, then the course is not full 
+        Courses.Add(course);
     }
     public void Leave(Course course)
     {
